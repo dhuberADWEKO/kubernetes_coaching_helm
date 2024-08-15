@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ include "my-helm-chart.fullname" . }}-postgres
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: postgres
+    template:
+        metadata:
+            labels:
+                app: postgres
+        spec:
+            containers:
+                - name: postgres
+                  image: "{{ .Values.postgresImage.repository }}:{{ .Values.postgresImage.tag }}"
+                  imagePullPolicy: {{ .Values.postgresImage.pullPolicy }}
+                  env:
+                      - name: POSTGRES_DB
+                        valueFrom:
+                            secretKeyRef:
+                                name: {{ include "my-helm-chart.fullname" . }}-secret
+                                key: database
+                      - name: POSTGRES_USER
+                        valueFrom:
+                            secretKeyRef:
+                                name: {{ include "my-helm-chart.fullname" . }}-secret
+                                key: username
+                      - name: POSTGRES_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: {{ include "my-helm-chart.fullname" . }}-secret
+                                key: password
+                  ports:
+                      - containerPort: 5432
+                  volumeMounts:
+                      - mountPath: /var/lib/postgresql/data
+                        name: postgres-storage
+                  resources:
+                      limits:
+                          cpu: "1"
+                          memory: "512Mi"
+                      requests:
+                          cpu: "500m"
+                          memory: "256Mi"
+            volumes:
+                - name: postgres-storage
+                  persistentVolumeClaim:
+                      claimName: {{ include "my-helm-chart.fullname" . }}-pvc

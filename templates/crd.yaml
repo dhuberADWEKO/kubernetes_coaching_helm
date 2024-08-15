@@ -1,0 +1,8 @@
+{{- if .Values.customResource.enabled -}}
+apiVersion: "example.com/v1"
+kind: CustomResource
+metadata:
+    name: {{ .Values.customResource.name }}
+spec:
+    foo: "bar"
+  {{- end }}

@@ -1,0 +1,42 @@
+replicaCount: 1
+
+image:
+    repository: nginx
+    tag: stable
+    pullPolicy: IfNotPresent
+
+postgresImage:
+    repository: postgres
+    tag: 13
+    pullPolicy: IfNotPresent
+
+service:
+    type: ClusterIP
+    port: 80
+
+postgresService:
+    type: ClusterIP
+    port: 5432
+
+ingress:
+    enabled: true
+    annotations: {}
+    hosts:
+        - host: chart-example.local
+          paths:
+              - /
+
+persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClassName: manual
+
+secret:
+    username: admin
+    password: password123
+    database: mydatabase
+
+customResource:
+    enabled: true
+    name: my-custom-resource
