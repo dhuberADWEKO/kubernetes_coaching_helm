@@ -1,3 +1,5 @@
+# Default values for my-helm-chart.
+
 replicaCount: 1
 
 image:
@@ -11,10 +13,12 @@ postgresImage:
     pullPolicy: IfNotPresent
 
 service:
+    name: my-service  # Füge einen Namen für den Service hinzu
     type: ClusterIP
     port: 80
 
 postgresService:
+    name: postgres-service  # Füge einen Namen für den PostgreSQL-Service hinzu
     type: ClusterIP
     port: 5432
 
@@ -40,3 +44,7 @@ secret:
 customResource:
     enabled: true
     name: my-custom-resource
+
+# Optional overrides for names, useful for Helm templates
+nameOverride: ""
+fullnameOverride: ""
