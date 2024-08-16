@@ -13,12 +13,12 @@ postgresImage:
     pullPolicy: IfNotPresent
 
 service:
-    name: my-service  # Füge einen Namen für den Service hinzu
+    name: my-service
     type: ClusterIP
     port: 80
 
 postgresService:
-    name: postgres-service  # Füge einen Namen für den PostgreSQL-Service hinzu
+    name: postgres-service
     type: ClusterIP
     port: 5432
 
