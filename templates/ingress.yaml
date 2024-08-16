@@ -18,7 +18,7 @@ spec:
                     pathType: ImplementationSpecific
                     backend:
                         service:
-                            name: {{ include "my-helm-chart.fullname" $. }}
+                            name: {{ include "my-helm-chart.fullname" . }}
                             port:
                                 number: {{ $.Values.service.port }}
                 {{- end }}
