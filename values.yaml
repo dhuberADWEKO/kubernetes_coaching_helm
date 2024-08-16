@@ -23,7 +23,7 @@ postgresService:
     port: 5432
 
 ingress:
-    enabled: true
+    enabled: false
     annotations: {}
     hosts:
         - host: chart-example.local
