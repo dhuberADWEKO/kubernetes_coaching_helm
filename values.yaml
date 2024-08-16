@@ -47,4 +47,4 @@ customResource:
 
 # Optional overrides for names, useful for Helm templates
 nameOverride: ""
-fullnameOverride: "coaching-demo-fullname"
+fullnameOverride: ""
