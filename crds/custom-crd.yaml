@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-    name: {{ include "my-helm-chart.fullname" . }}-crd
+    name: custom-crd
 spec:
-    group: example.com
+    group: custom-crd-group
     versions:
         - name: v1
           served: true
