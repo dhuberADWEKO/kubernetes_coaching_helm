@@ -4,33 +4,80 @@ Welcome to the Kubernetes, ArgoCD, and HELM training repository! This repository
 
 ## Topics Covered
 
-1. **HELM Chart for Coaching**
+### 1. **HELM Chart for Coaching**
    - This section contains a HELM chart specifically designed for coaching purposes. It will help you understand the basic structure and components of HELM charts and how they can be customized to suit specific application needs.
 
-2. **Prerequisites**
+### 2. **Prerequisites**
    - **WSL2 (Windows only)**
      - Ensure that you have WSL2 installed on your Windows machine for optimal compatibility with Docker and Kubernetes.
    - **Docker Desktop**
      - Docker Desktop is required to manage containers and Kubernetes clusters locally.
 
-3. **Installing HELM**
-   - Detailed instructions will guide you through the process of installing HELM on both Windows (using WSL2) and Mac. For now, placeholders are provided, and detailed instructions will be added soon.
-   - **Windows Installation (WSL2)**
-     - Placeholder for detailed installation steps.
-   - **Mac Installation**
-     - Placeholder for detailed installation steps.
+### 3. **Installing HELM**
+   Detailed instructions will guide you through the process of installing HELM on both Windows (using WSL2) and Mac.
 
-4. **Setting Up ArgoCD Locally**
-   - Learn how to set up ArgoCD on your local environment to manage your Kubernetes applications. Instructions will be provided for both Windows (using WSL2) and Mac.
-   - **Windows Installation (WSL2)**
-     - Placeholder for detailed installation steps.
-   - **Mac Installation**
-     - Placeholder for detailed installation steps.
+####   **Windows Installation (WSL2)**
+   ```bash
+   curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+   chmod 700 get_helm.sh
+   ./get_helm.sh
+   helm version
+   ```
 
-5. **Scripts for Efficient Management of Local ArgoCD Instances**
+####   **Mac Installation**
+  ```bash
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew install helm
+  helm version
+  ```
+
+### 4. **Setting Up ArgoCD Locally**
+   Detailed instructions will guide you through the process of installing argoCD locally on both Windows (using WSL2) and Mac.
+
+####   **Windows Installation (WSL2)**
+   ```bash
+   VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+   curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
+   sudo mv argocd-linux-amd64 /usr/local/bin/argocd
+   sudo chmod +x /usr/local/bin/argocd
+   argocd version
+   kubectl create namespace argocd
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+   kubectl port-forward svc/argocd-server -n argocd 8090:443
+   ```
+   
+   Keep the connection open and start a second terminal:
+   ```bash
+   kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+   echo "This is your password: "
+   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+   ```
+
+   Access the GUI via https://localhost:8090
+
+####   **Mac Installation**
+   ```bash
+   brew install argocd
+   argocd version
+   kubectl create namespace argocd
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+   kubectl port-forward svc/argocd-server -n argocd 8090:443
+   ```
+
+   Keep the connection open and start a second terminal:
+   ```bash
+   kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+   echo "This is your password: "
+   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+   ```
+
+   Access the GUI via https://localhost:8090
+
+
+### 5. **Scripts for Efficient Management of Local ArgoCD Instances**
    - This section includes scripts that streamline the management of your local ArgoCD instance, making it easier to handle day-to-day operations and deployments.
 
-6. **Scripts for GitHub/BitBucket Runner**
+### 6. **Scripts for GitHub/BitBucket Runner**
    - To further enhance your CI/CD pipeline, we provide scripts that facilitate the integration of GitHub or BitBucket runners with your local environment.
 
 ## Getting Started
