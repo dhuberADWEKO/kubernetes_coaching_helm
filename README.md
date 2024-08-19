@@ -4,16 +4,16 @@ Welcome to the Kubernetes, ArgoCD, and HELM training repository! This repository
 
 ## Topics Covered
 
-### 1. **HELM Chart for Coaching**
+### **HELM Chart for Coaching**
    - This section contains a HELM chart specifically designed for coaching purposes. It will help you understand the basic structure and components of HELM charts and how they can be customized to suit specific application needs.
 
-### 2. **Prerequisites**
+### **Prerequisites**
    - **WSL2 (Windows only)**
      - Ensure that you have WSL2 installed on your Windows machine for optimal compatibility with Docker and Kubernetes.
    - **Docker Desktop**
      - Docker Desktop is required to manage containers and Kubernetes clusters locally.
 
-### 3. **Installing HELM**
+### **Installing HELM**
    Detailed instructions will guide you through the process of installing HELM on both Windows (using WSL2) and Mac.
 
 ####   **Windows Installation (WSL2)**
@@ -31,7 +31,7 @@ Welcome to the Kubernetes, ArgoCD, and HELM training repository! This repository
   helm version
   ```
 
-### 4. **Setting Up ArgoCD Locally**
+### **Setting Up ArgoCD Locally**
    Detailed instructions will guide you through the process of installing argoCD locally on both Windows (using WSL2) and Mac.
 
 ####   **Windows Installation (WSL2)**
@@ -74,11 +74,11 @@ Welcome to the Kubernetes, ArgoCD, and HELM training repository! This repository
    Access the GUI via https://localhost:8090
 
 
-### 5. **Scripts for Efficient Management of Local ArgoCD Instances**
-   - This section includes scripts that streamline the management of your local ArgoCD instance, making it easier to handle day-to-day operations and deployments.
+### **Scripts for Efficient Management of Local ArgoCD Instances**
+You can check the **cluster-handling** folder for bash scripts enabling a secure export and restore procedure for the argoCD namespace in the local Kubernetes instance.
 
-### 6. **Scripts for GitHub/BitBucket Runner**
-   - To further enhance your CI/CD pipeline, we provide scripts that facilitate the integration of GitHub or BitBucket runners with your local environment.
+### **Scripts for GitHub/BitBucket Runner**
+You can check the **.github/workflows** folder for scripts improving the overall repository handling in terms of code consistency and HELM chart structure verification.
 
 ## Getting Started
 
