@@ -18,7 +18,7 @@ spec:
                     pathType: ImplementationSpecific
                     backend:
                         service:
-                            name: unique-service-name
+                            name: unique-service
                             port:
                                 number: {{ $.Values.service.port }}
                 {{- end }}

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: {{ include "my-helm-chart.fullname" . }}
+    name: {{ include "my-helm-chart.fullname" . }}-deployment
 spec:
     replicas: {{ .Values.replicaCount }}
     selector:

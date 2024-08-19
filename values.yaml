@@ -41,6 +41,12 @@ secret:
     password: password123
     database: mydatabase
 
+job:
+    image: alpine
+    tag: latest
+    imagePullPolicy: IfNotPresent
+    backoffLimit: 4
+
 customResource:
     enabled: true
     name: my-custom-resource
