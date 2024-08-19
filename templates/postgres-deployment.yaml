@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: {{ include "my-helm-chart.fullname" . }}-postgres
+    name: {{ include "my-helm-chart.fullname" . }}-deployment-postgres
 spec:
     replicas: 1
     selector:
