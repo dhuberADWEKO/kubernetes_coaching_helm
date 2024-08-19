@@ -31,10 +31,10 @@ ingress:
               - /
 
 persistence:
-    enabled: true
     accessMode: ReadWriteOnce
     size: 1Gi
     storageClassName: manual
+    reclaimPolicy: Retain
 
 secret:
     username: admin
