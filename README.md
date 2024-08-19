@@ -5,7 +5,7 @@ Welcome to the Kubernetes, ArgoCD, and HELM training repository! This repository
 ## Topics Covered
 
 ### **HELM Chart for Coaching**
-   - This section contains a HELM chart specifically designed for coaching purposes. It will help you understand the basic structure and components of HELM charts and how they can be customized to suit specific application needs.
+This section contains a HELM chart specifically designed for coaching purposes. It will help you understand the basic structure and components of HELM charts and how they can be customized to suit specific application needs.
 
 ### **Prerequisites**
    - **WSL2 (Windows only)**
