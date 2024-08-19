@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    name: {{ include "my-helm-chart.fullname" . }}-job
+    annotations:
+        "helm.sh/hook": post-install,post-upgrade
+        "helm.sh/hook-weight": "0"
+        "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+spec:
+    template:
+        spec:
+            containers:
+                - name: db-migration
+                  image: "{{ .Values.job.image }}:{{ .Values.job.tag }}"
+                  imagePullPolicy: {{ .Values.job.imagePullPolicy }}
+                  command: ["sh", "-c", "echo 'Running database migration'; sleep 5; echo 'Migration complete'"]
+                  env:
+                      - name: DB_USERNAME
+                        valueFrom:
+                            secretKeyRef:
+                                name: helm-chart-secret
+                                key: username
+                      - name: DB_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: helm-chart-secret
+                                key: password
+            restartPolicy: Never
+    backoffLimit: {{ .Values.job.backoffLimit }}
