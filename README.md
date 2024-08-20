@@ -74,6 +74,23 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    Access the GUI via https://localhost:8090 - Standard username is 'admin'
 
 
+### **Setup of ArgoCD application**
+First create a new namespace in Kubernetes where we will deploy our HELM chart:
+```bash
+kubectl create namespace coaching
+```
+
+Now we can start setting up a **new application** in our local argoCD instance:
+- Application Name: helm-demo 
+- Project Name: default
+- Sync Policy: Manual (will be adapted later)
+- Repository URL: https://github.com/dhuberADWEKO/kubernetes_coaching_helm.git
+- Revision: master
+- Path: .
+- Cluster URL: https://kubernetes.default.svc (will be automatically set to 'in cluster')
+- Namespace: coaching
+- Values files: values.yaml
+
 ### **Scripts for Efficient Management of Local ArgoCD Instances**
 You can check the **cluster-handling** folder for bash scripts enabling a secure export and restore procedure for the argoCD namespace in the local Kubernetes instance.
 
