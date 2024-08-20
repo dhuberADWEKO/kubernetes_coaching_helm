@@ -37,7 +37,7 @@ This section contains a HELM chart specifically designed for coaching purposes. 
   helm version
   ```
 
-### **Setting Up ArgoCD Locally**
+### **Installing a local ArgoCD Instance**
    Detailed instructions will guide you through the process of installing argoCD locally on both Windows (using WSL2) and Mac.
 
 ####   **Windows Installation (WSL2)**
