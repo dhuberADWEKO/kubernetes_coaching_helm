@@ -92,7 +92,7 @@ Now we can start setting up a **new application** in our local argoCD instance:
 - Values files: values.yaml
 
 ### **Scripts for Efficient Management of Local ArgoCD Instances**
-You can check the **cluster-handling** folder for bash scripts enabling a secure export and restore procedure for the argoCD namespace in the local Kubernetes instance.
+You can check the **cluster-handling** folder for bash scripts enabling a secure export and restore procedure for the argoCD instance in the local Kubernetes namespace.
 
 ### **Scripts for GitHub/BitBucket Runner**
 You can check the **.github/workflows** folder for scripts improving the overall repository handling in terms of code consistency and HELM chart structure verification.
