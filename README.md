@@ -53,7 +53,7 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
    ```
 
-   Access the GUI via https://localhost:8090
+   Access the GUI via https://localhost:8090 - Standard username is 'admin'
 
 ####   **Mac Installation**
    ```bash
@@ -71,7 +71,7 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
    ```
 
-   Access the GUI via https://localhost:8090
+   Access the GUI via https://localhost:8090 - Standard username is 'admin'
 
 
 ### **Scripts for Efficient Management of Local ArgoCD Instances**
