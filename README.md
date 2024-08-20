@@ -12,11 +12,17 @@ This section contains a HELM chart specifically designed for coaching purposes. 
      - Ensure that you have WSL2 installed on your Windows machine for optimal compatibility with Docker and Kubernetes.
    - **Docker Desktop**
      - Docker Desktop is required to manage containers and Kubernetes clusters locally.
+   - **Homebrew (Mac only)**
+     - Ensure Homebrew is installed as follows:
+       ```bash
+       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+       ```
 
 ### **Installing HELM**
    Detailed instructions will guide you through the process of installing HELM on both Windows (using WSL2) and Mac.
 
 ####   **Windows Installation (WSL2)**
+   Install using the official GitHub Script:
    ```bash
    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
    chmod 700 get_helm.sh
@@ -25,8 +31,8 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    ```
 
 ####   **Mac Installation**
+  Install using the Homebrew package: 
   ```bash
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew install helm
   helm version
   ```
@@ -35,18 +41,23 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    Detailed instructions will guide you through the process of installing argoCD locally on both Windows (using WSL2) and Mac.
 
 ####   **Windows Installation (WSL2)**
+   Install using the official GitHub Script:
    ```bash
    VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
    curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
    sudo mv argocd-linux-amd64 /usr/local/bin/argocd
    sudo chmod +x /usr/local/bin/argocd
    argocd version
+   ```
+   
+   Apply the necessary Kubernetes procedure:
+   ```bash
    kubectl create namespace argocd
    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
    kubectl port-forward svc/argocd-server -n argocd 8090:443
    ```
    
-   Keep the connection open and start a second terminal:
+   Keep the connection open (!) and start a second terminal:
    ```bash
    kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
    echo "This is your password: "
@@ -56,15 +67,20 @@ This section contains a HELM chart specifically designed for coaching purposes. 
    Access the GUI via https://localhost:8090 - Standard username is 'admin'
 
 ####   **Mac Installation**
+   Install using Homebrew:
    ```bash
    brew install argocd
    argocd version
+   ```
+   
+   Apply the necessary Kubernetes procedure:
+   ```bash
    kubectl create namespace argocd
    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
    kubectl port-forward svc/argocd-server -n argocd 8090:443
    ```
 
-   Keep the connection open and start a second terminal:
+   Keep the connection open (!) and start a second terminal:
    ```bash
    kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
    echo "This is your password: "
