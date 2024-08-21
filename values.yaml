@@ -1,5 +1,3 @@
-# Default values for my-helm-chart.
-
 replicaCount: 1
 
 image:
@@ -51,6 +49,6 @@ customResource:
     enabled: true
     name: my-custom-resource
 
-# Optional overrides for names, useful for Helm templates
+# Optional overrides for names
 nameOverride: ""
 fullnameOverride: ""
