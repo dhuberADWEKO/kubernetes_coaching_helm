@@ -17,6 +17,13 @@ This section contains a HELM chart specifically designed for coaching purposes. 
        ```bash
        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
        ```
+   - **Minikube Kubernetes Cluster (Mac only)**
+     - For the case, that the built-in Kubernetes cluster in Docker Desktop is NOT starting on your Mac, please just install a default Minikube single-node cluster via Homebrew:
+       ```bash
+       brew install minikube
+       minikube start
+       ```
+     - This will automatically be detected within Docker Desktop as 'mini-kube' and argoCD and HELM can be installed straightforward without the need of any further adaptions  
 
 ### **Installing HELM**
    Detailed instructions will guide you through the process of installing HELM on both Windows (using WSL2) and Mac.
