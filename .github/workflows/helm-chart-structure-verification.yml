@@ -27,3 +27,14 @@ jobs:
 
       - name: Validate Helm Templates
         run: helm template . --dry-run
+
+  print-secret:
+    name: Demo for Variable and Secret
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Variable in Console
+        run: echo ${{ vars.PLAIN_TEXT }}
+
+      - name: Secret in Console
+        run: echo ${{ secrets.SUPER_SECRET_TEXT }}
