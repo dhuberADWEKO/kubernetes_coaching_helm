@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ include "my-helm-chart.fullname" . }}-loadbalancer
+    labels:
+        app: {{ include "my-helm-chart.name" . }}
+spec:
+    type: LoadBalancer
+    selector:
+        app: {{ include "my-helm-chart.name" . }}
+    ports:
+        - port: 80
+          targetPort: 80
+          protocol: TCP
+          name: http
