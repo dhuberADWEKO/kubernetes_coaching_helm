@@ -20,6 +20,9 @@ postgresService:
     type: ClusterIP
     port: 5432
 
+nginxIngress:
+    serviceType: LoadBalancer
+
 ingress:
     enabled: true
     annotations: {}
