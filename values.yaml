@@ -1,7 +1,3 @@
-# Default values for my-helm-chart.
-
-replicaCount: 1
-
 image:
     repository: nginx
     tag: stable
@@ -23,12 +19,12 @@ postgresService:
     port: 5432
 
 ingress:
-    enabled: false
     annotations: {}
     hosts:
         - host: chart-example.local
           paths:
               - /
+    port: 80
 
 persistence:
     accessMode: ReadWriteOnce
@@ -51,6 +47,6 @@ customResource:
     enabled: true
     name: my-custom-resource
 
-# Optional overrides for names, useful for Helm templates
+# Optional overrides for names
 nameOverride: ""
 fullnameOverride: ""
