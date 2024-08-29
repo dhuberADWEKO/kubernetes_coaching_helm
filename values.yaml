@@ -1,7 +1,3 @@
-# Default values for my-helm-chart.
-
-replicaCount: 1
-
 image:
     repository: nginx
     tag: stable
@@ -21,14 +17,6 @@ postgresService:
     name: postgres-service
     type: ClusterIP
     port: 5432
-
-ingress:
-    enabled: false
-    annotations: {}
-    hosts:
-        - host: chart-example.local
-          paths:
-              - /
 
 persistence:
     accessMode: ReadWriteOnce
