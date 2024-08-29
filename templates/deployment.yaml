@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
     name: {{ include "my-helm-chart.fullname" . }}-deployment
 spec:
-    replicas: {{ .Values.replicaCount }}
+    replicas: 1
     selector:
         matchLabels:
             app: {{ include "my-helm-chart.name" . }}
