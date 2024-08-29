@@ -17,6 +17,6 @@ spec:
                         service:
                             name: unique-service
                             port:
-                                number: {{ $.Values.service.port }}
+                                number: {{ $.Values.ingress.port }}
       {{- end }}
 {{- end }}

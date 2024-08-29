@@ -1,5 +1,3 @@
-replicaCount: 1
-
 image:
     repository: nginx
     tag: stable
@@ -30,6 +28,7 @@ ingress:
         - host: chart-example.local
           paths:
               - /
+    port: 80
 
 persistence:
     accessMode: ReadWriteOnce
