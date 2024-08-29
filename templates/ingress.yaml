@@ -7,7 +7,8 @@ metadata:
         nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
     rules:
-        - host: {{ .Values.ingress.hosts[0].host }}
+      {{- range .Values.ingress.hosts }}
+        - host: {{ .host | quote }}
           http:
               paths:
                   - path: /
@@ -17,4 +18,5 @@ spec:
                             name: unique-service
                             port:
                                 number: {{ $.Values.service.port }}
+      {{- end }}
 {{- end }}
