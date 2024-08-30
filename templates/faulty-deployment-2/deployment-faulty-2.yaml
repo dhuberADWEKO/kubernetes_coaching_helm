@@ -1,0 +1,29 @@
+# Problem: Ressourcenanforderungen überschreiten die verfügbaren Ressourcen im Cluster, was zu einer Insufficient CPU/Memory-Fehlermeldung führt.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: faulty-deployment-2
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: my-helm-chart
+    template:
+        metadata:
+            labels:
+                app: my-helm-chart
+        spec:
+            containers:
+                - name: nginx
+                  image: "nginx:stable"
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 80
+                  resources:
+                      limits:
+                          cpu: {{ if .Values.faults.deploymentTwoCpuWrong }}"50000m"{{ else }}"500m"{{ end }}
+                          memory: "256Mi"
+                      requests:
+                          cpu: {{ if .Values.faults.deploymentTwoCpuWrong }}"25000m"{{ else }}"250m"{{ end }}
+                          memory: "128Mi"
