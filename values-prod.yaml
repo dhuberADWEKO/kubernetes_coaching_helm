@@ -1,0 +1,47 @@
+# Verwenden einer stabilen und spezifischen Version für das Image
+image:
+    repository: nginx
+    tag: stable
+    pullPolicy: IfNotPresent
+
+# Verwenden einer spezifischen und stabilen Version von Postgres
+postgresImage:
+    repository: postgres
+    tag: 13.4
+    pullPolicy: IfNotPresent
+
+# Diensttyp auf LoadBalancer setzen, um externen Zugriff zu ermöglichen
+service:
+    name: my-service
+    type: LoadBalancer
+    port: 80
+
+# Datenbankdienst auf LoadBalancer setzen, um externen Zugriff zu ermöglichen
+postgresService:
+    name: postgres-service
+    type: LoadBalancer
+    port: 5432
+
+# Produktionsdaten erfordern mehr Speicherplatz und Leistung
+persistence:
+    accessMode: ReadWriteMany # Mehrere Knoten benötigen Zugriff in Produktionsumgebungen
+    size: 2Gi # Größerer Speicherplatz für produktive Daten
+    storageClassName: manual
+    reclaimPolicy: Retain
+
+# Sicherere Anmeldeinformationen für die Datenbank in der Produktion
+secret:
+    username: prod_user
+    password: secureProdPassword123
+    database: prod_database
+
+# Produktivjob-Einstellungen mit höheren BackoffLimits für bessere Zuverlässigkeit
+job:
+    image: alpine
+    tag: 3.14 # Spezifischere und stabilere Version
+    imagePullPolicy: IfNotPresent
+    backoffLimit: 10 # Höheres Limit für größere Zuverlässigkeit in Prod
+
+customResource:
+    enabled: true
+    name: prod-custom-resource
