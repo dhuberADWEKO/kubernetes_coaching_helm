@@ -11,3 +11,6 @@ spec:
     storageClassName: {{ .Values.persistence.storageClassName }}
     hostPath:
         path: "/mnt/data"
+    claimRef: # Ensure PVC bind
+        namespace: coaching
+        name: {{ include "my-helm-chart.fullname" . }}-pvc
