@@ -18,6 +18,13 @@ postgresService:
     type: ClusterIP
     port: 5432
 
+ingress:
+    annotations: {}
+    hosts:
+        - host: chart-example.local
+          paths:
+              - /
+
 persistence:
     accessMode: ReadWriteOnce
     size: 1Gi
@@ -39,6 +46,6 @@ customResource:
     enabled: true
     name: my-custom-resource
 
-# Optional overrides for names, useful for Helm templates
+# Optional overrides for names
 nameOverride: ""
 fullnameOverride: ""
