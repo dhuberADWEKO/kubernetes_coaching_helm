@@ -39,6 +39,12 @@ customResource:
     enabled: true
     name: my-custom-resource
 
+faults:
+    pvcOneAccessModeWrong: true
+    pvcTwoStorageWrong: true
+    deploymentOneImageWrong: true
+    deploymentTwoCpuWrong: true
+
 # Optional overrides for names, useful for Helm templates
 nameOverride: ""
 fullnameOverride: ""

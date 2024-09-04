@@ -1,0 +1,29 @@
+# Problem: Das angegebene Container-Image existiert nicht, was zu einem ImagePullBackOff-Fehler führt.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: faulty-deployment-1
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: my-helm-chart
+    template:
+        metadata:
+            labels:
+                app: my-helm-chart
+        spec:
+            containers:
+                - name: nginx
+                  image: {{ if .Values.faults.deploymentOneImageWrong }}"nginx:nonexistent-tag"{{ else }}"nginx:stable"{{ end }}
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 80
+                  resources:
+                      limits:
+                          cpu: "500m"
+                          memory: "256Mi"
+                      requests:
+                          cpu: "250m"
+                          memory: "128Mi"

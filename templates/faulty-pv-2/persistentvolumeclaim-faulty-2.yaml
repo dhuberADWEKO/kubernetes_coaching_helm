@@ -1,0 +1,13 @@
+# Problem: Der angeforderte Speicherplatz im PVC ist größer als der im PV verfügbare Speicherplatz.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: faulty-pvc-2
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: {{ if .Values.faults.pvcTwoStorageWrong }}10Gi{{ else }}1Gi{{ end }}
+    storageClassName: manual

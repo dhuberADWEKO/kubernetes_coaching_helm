@@ -1,0 +1,13 @@
+# Problem: Unstimmigkeit zwischen accessMode des PVC und des PV, was verhindert, dass das PVC gebunden wird.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: faulty-pvc-1
+spec:
+    accessModes:
+        - {{ if .Values.faults.pvcOneAccessModeWrong }}ReadWriteMany{{ else }}ReadWriteOnce{{ end }}
+    resources:
+        requests:
+            storage: 1Gi
+    storageClassName: manual
