@@ -1,0 +1,87 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: {{ include "my-helm-chart.fullname" . }}-nginx-ingress-clusterrole
+rules:
+    - apiGroups:
+          - ""
+      resources:
+          - configmaps
+          - endpoints
+          - nodes
+          - pods
+          - secrets
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - ""
+      resources:
+          - nodes
+      verbs:
+          - get
+    - apiGroups:
+          - ""
+      resources:
+          - services
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - networking.k8s.io
+      resources:
+          - ingresses
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - networking.k8s.io
+      resources:
+          - ingresses/status
+      verbs:
+          - update
+    - apiGroups:
+          - extensions
+      resources:
+          - ingresses
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - extensions
+      resources:
+          - ingresses/status
+      verbs:
+          - update
+    - apiGroups:
+          - ""
+      resources:
+          - configmaps
+          - events
+          - namespaces
+      verbs:
+          - create
+          - get
+          - list
+          - watch
+    - apiGroups: # new groups
+          - networking.k8s.io
+      resources:
+          - ingressclasses
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - ""
+      resources:
+          - services
+          - endpoints
+          - pods
+      verbs:
+          - get
+          - list
+          - watch

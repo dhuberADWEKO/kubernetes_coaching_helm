@@ -1,0 +1,20 @@
+# IMPORTANT: You MUST add '127.0.0.1 chart-example.local' to your "hosts" file to make DNS resolution possible!
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: {{ include "my-helm-chart.fullname" . }}-ingress
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    rules:
+        - host: "chart-example.local"
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: unique-service
+                            port:
+                                number: {{ .Values.service.port }} # MUST use the referenced service's port!

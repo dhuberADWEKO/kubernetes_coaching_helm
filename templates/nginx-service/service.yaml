@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: unique-service
+    labels:
+        app: nginx-app # Eindeutiges Label für den Service, passend zum NGINX-Pod
+spec:
+    selector:
+        app: nginx-app # Der Service selektiert nur die Pods mit dem Label `nginx-app`
+    type: {{ .Values.service.type }}
+    ports:
+        - port: {{ .Values.service.port }}
+          targetPort: 80
