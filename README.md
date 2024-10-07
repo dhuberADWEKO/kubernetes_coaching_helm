@@ -120,6 +120,31 @@ You can check the **cluster-handling** folder for bash scripts enabling a secure
 ### **Scripts for GitHub/BitBucket Runner**
 You can check the **.github/workflows** folder for scripts improving the overall repository handling in terms of code consistency and HELM chart structure verification.
 
+## Additional features
+
+### **External Secret functionality**
+To enable External Secret functionality in your Kubernetes cluster, you need to install the appropriate Custom Resource Definition (CRD) for **ExternalSecrets**. This CRD defines how Kubernetes can manage and retrieve secrets from external systems like HashiCorp Vault, AWS Secrets Manager, and more.
+
+1. **Install the CRD**:
+   Before using `ExternalSecrets`, you must apply the CRD cluster-wide, as it is a custom Kubernetes resource that is not namespace-specific. To install the CRD, run the following command:
+
+   ```bash
+   kubectl apply -f external-secret-crd.yaml
+   ```
+   
+2. **Usage in a Namespace**:
+   Once the CRD is installed, you can create ExternalSecret resources in any namespace. The **ExternalSecret** resources will connect to external secret managers, such as Vault, to retrieve secrets and inject them into your Kubernetes pods.
+
+3. **Verify CRD Installation**:
+   After applying the CRD, you can check if it has been correctly installed by running:
+
+   ```bash
+   kubectl get crd externalsecrets.external-secrets.io
+   ```
+
+4. **ArgoCD Integration**:
+   When using ArgoCD, ensure the CRD is installed first. Once the CRD is present, ArgoCD will be able to synchronize and deploy the **ExternalSecret** resources across the cluster in the specified namespace.
+
 ## Getting Started
 
 Please review the prerequisites and ensure that your environment is properly set up before proceeding with the installation instructions. The placeholders will be updated with detailed steps in the near future.

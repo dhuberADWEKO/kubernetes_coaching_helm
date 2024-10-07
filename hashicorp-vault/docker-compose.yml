@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+    vault:
+        image: vault:1.13.3
+        container_name: vault
+        ports:
+            - "8200:8200"  # Vault API Port
+        environment:
+            VAULT_DEV_ROOT_TOKEN_ID: root  # Dev-Modus mit Root-Token
+            VAULT_ADDR: http://0.0.0.0:8200
+        volumes:
+            - ./vault:/vault/file
+        command: vault server -dev -dev-root-token-id=root
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8200/v1/sys/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
+    setup-vault-secrets:
+        image: vault:1.13.3
+        container_name: setup-vault-secrets
+        depends_on:
+            - vault
+        entrypoint: >
+            /bin/sh -c "
+            until curl -s http://vault:8200/v1/sys/health; do
+              echo 'Waiting for Vault...';
+              sleep 3;
+            done;
+            echo 'Vault is ready, adding secrets...';
+            vault kv put secret/data/myapp credentials='{\"username\":\"myuser\", \"password\":\"mypassword\"}';
+            vault kv put secret/data/myapp database='{\"database\":\"mydb\"}';
+            echo 'Secrets added successfully.';
+            "
+        environment:
+            VAULT_ADDR: http://vault:8200
+            VAULT_TOKEN: root  # Nutzt das Root-Token für den dev-Modus
+        network_mode: "service:vault"
+
+networks:
+    default:
+        name: vault-network

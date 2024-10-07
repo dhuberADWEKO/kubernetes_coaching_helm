@@ -20,17 +20,17 @@ spec:
                       - name: POSTGRES_DB
                         valueFrom:
                             secretKeyRef:
-                                name: helm-chart-secret
+                                name: helm-chart-external-secret
                                 key: database
                       - name: POSTGRES_USER
                         valueFrom:
                             secretKeyRef:
-                                name: helm-chart-secret
+                                name: helm-chart-external-secret
                                 key: username
                       - name: POSTGRES_PASSWORD
                         valueFrom:
                             secretKeyRef:
-                                name: helm-chart-secret
+                                name: helm-chart-external-secret
                                 key: password
                   ports:
                       - containerPort: 5432
