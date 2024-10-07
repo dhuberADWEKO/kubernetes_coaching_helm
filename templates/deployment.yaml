@@ -18,6 +18,16 @@ spec:
                   imagePullPolicy: {{ .Values.image.pullPolicy }}
                   ports:
                       - containerPort: 80
+                  volumeMounts:
+                      - name: config-volume
+                        mountPath: /etc/nginx/nginx.conf
+                        subPath: nginx.conf
+                  env:
+                      - name: ADDITIONAL_SETTING
+                        valueFrom:
+                            configMapKeyRef:
+                                name: {{ include "my-helm-chart.fullname" . }}-configmap
+                                key: additional_setting
                   resources:
                       limits:
                           cpu: "500m"
@@ -25,3 +35,7 @@ spec:
                       requests:
                           cpu: "250m"
                           memory: "128Mi"
+            volumes:
+                - name: config-volume
+                  configMap:
+                      name: {{ include "my-helm-chart.fullname" . }}-configmap
