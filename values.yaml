@@ -3,6 +3,9 @@ image:
     tag: stable
     pullPolicy: IfNotPresent
 
+nginxConfig:
+    serverName: "myapp.local"
+
 postgresImage:
     repository: postgres
     tag: 13
