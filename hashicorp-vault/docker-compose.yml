@@ -9,9 +9,7 @@ services:
         environment:
             VAULT_DEV_ROOT_TOKEN_ID: root  # Dev-Modus mit Root-Token
             VAULT_ADDR: http://0.0.0.0:8200
-        volumes:
-            - ./vault:/vault/file
-        command: vault server -dev -dev-root-token-id=root
+        command: vault server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:8200/v1/sys/health"]
             interval: 30s
