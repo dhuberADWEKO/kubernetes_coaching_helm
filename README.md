@@ -145,6 +145,32 @@ To enable External Secret functionality in your Kubernetes cluster, you need to 
 4. **ArgoCD Integration**:
    When using ArgoCD, ensure the CRD is installed first. Once the CRD is present, ArgoCD will be able to synchronize and deploy the **ExternalSecret** resources across the cluster in the specified namespace.
 
+### **Find correct HashiCorp KeyVault server address**
+
+1. Before using your external Secrets and after having run the HashiCorp KeyVault docker compose file, you may have to adapt the **server** address within the __external-secret.yaml__ file.
+   Therefore, double check your docker **inet ip** on the system where **Kubernetes is running** (in Windows this is WSL2) by executing the following in the terminal:
+   
+   ```bash
+   ip a
+   ```
+
+   Check the **eth0** --> **inet** address and use the IP presented there at the **server** address within the __external-secret.yaml__ file.
+   
+2. When curling the address via
+
+```bash
+curl http://<IP-ADDRESS>:8200/v1/sys/health
+```
+
+you should receive a response like follows:
+
+```bash
+{"initialized":true,"sealed":false,"standby":false,"performance_standby":false,"replication_performance_mode":"disabled","replication_dr_mode":"disabled","server_time_utc":1728552362,"version":"1.13.3","cluster_name":"vault-cluster-4603eedc","cluster_id":"84b5ecb7-ec31-2d0a-9ae3-a3893a7144c1"}
+```
+
+3. Adapt the  **server** address within the __external-secret.yaml__ file accordingly.
+
+
 ## Getting Started
 
 Please review the prerequisites and ensure that your environment is properly set up before proceeding with the installation instructions. The placeholders will be updated with detailed steps in the near future.
