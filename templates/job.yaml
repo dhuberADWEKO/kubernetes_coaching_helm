@@ -14,12 +14,12 @@ spec:
                       - name: DB_USERNAME
                         valueFrom:
                             secretKeyRef:
-                                name: helm-chart-secret
+                                name: helm-chart-external-secret
                                 key: username
                       - name: DB_PASSWORD
                         valueFrom:
                             secretKeyRef:
-                                name: helm-chart-secret
+                                name: helm-chart-external-secret
                                 key: password
             restartPolicy: Never
     backoffLimit: {{ .Values.job.backoffLimit }}

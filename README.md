@@ -120,6 +120,57 @@ You can check the **cluster-handling** folder for bash scripts enabling a secure
 ### **Scripts for GitHub/BitBucket Runner**
 You can check the **.github/workflows** folder for scripts improving the overall repository handling in terms of code consistency and HELM chart structure verification.
 
+## Additional features
+
+### **External Secret functionality**
+To enable External Secret functionality in your Kubernetes cluster, you need to install the appropriate Custom Resource Definition (CRD) for **ExternalSecrets**. This CRD defines how Kubernetes can manage and retrieve secrets from external systems like HashiCorp Vault, AWS Secrets Manager, and more.
+
+1. **Install the CRD**:
+   Before using `ExternalSecrets`, you must apply the CRD cluster-wide, as it is a custom Kubernetes resource that is not namespace-specific. To install the CRD, run the following command:
+
+   ```bash
+   kubectl apply -f external-secret-crd.yaml
+   ```
+   
+2. **Usage in a Namespace**:
+   Once the CRD is installed, you can create ExternalSecret resources in any namespace. The **ExternalSecret** resources will connect to external secret managers, such as Vault, to retrieve secrets and inject them into your Kubernetes pods.
+
+3. **Verify CRD Installation**:
+   After applying the CRD, you can check if it has been correctly installed by running:
+
+   ```bash
+   kubectl get crd externalsecrets.external-secrets.io
+   ```
+
+4. **ArgoCD Integration**:
+   When using ArgoCD, ensure the CRD is installed first. Once the CRD is present, ArgoCD will be able to synchronize and deploy the **ExternalSecret** resources across the cluster in the specified namespace.
+
+### **Find correct HashiCorp KeyVault server address**
+
+1. Before using your external Secrets and after having run the HashiCorp KeyVault docker compose file, you may have to adapt the **server** address within the __external-secret.yaml__ file.
+   Therefore, double check your docker **inet ip** on the system where **Kubernetes is running** (in Windows this is WSL2) by executing the following in the terminal:
+   
+   ```bash
+   ip a
+   ```
+
+   Check the **eth0** --> **inet** address and use the IP presented there at the **server** address within the __external-secret.yaml__ file.
+   
+2. When curling the address via
+
+```bash
+curl http://<IP-ADDRESS>:8200/v1/sys/health
+```
+
+you should receive a response like follows:
+
+```bash
+{"initialized":true,"sealed":false,"standby":false,"performance_standby":false,"replication_performance_mode":"disabled","replication_dr_mode":"disabled","server_time_utc":1728552362,"version":"1.13.3","cluster_name":"vault-cluster-4603eedc","cluster_id":"84b5ecb7-ec31-2d0a-9ae3-a3893a7144c1"}
+```
+
+3. Adapt the  **server** address within the __external-secret.yaml__ file accordingly.
+
+
 ## Getting Started
 
 Please review the prerequisites and ensure that your environment is properly set up before proceeding with the installation instructions. The placeholders will be updated with detailed steps in the near future.
