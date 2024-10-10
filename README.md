@@ -128,6 +128,10 @@ Please review the prerequisites and ensure that your environment is properly set
 
 Contributions to this repository are welcome! If you have suggestions, improvements, or additional scripts that could benefit others, please feel free to submit a pull request.
 
+## Attribution
+
+This project utilizes the External Secrets library to manage secrets. It is licensed under the Apache 2.0 License. For more information, please refer to the [External Secrets GitHub repository](https://github.com/external-secrets/external-secrets).
+
 ## License
 
-This repository is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
+This repository is licensed under the MIT License and the Apache 2.0 License. For more details, see the [LICENSE](LICENSE) and [NOTICE](NOTICE) files. This project uses the External Secrets library, which is licensed under the Apache 2.0 License. For more information, please visit the [External Secrets GitHub repository](https://github.com/external-secrets/external-secrets).
