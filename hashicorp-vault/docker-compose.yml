@@ -23,6 +23,7 @@ services:
             - vault
         entrypoint: >
             /bin/sh -c "
+            apk add --no-cache curl;
             until curl -s http://vault:8200/v1/sys/health; do
               echo 'Waiting for Vault...';
               sleep 3;
@@ -34,7 +35,7 @@ services:
             "
         environment:
             VAULT_ADDR: http://vault:8200
-            VAULT_TOKEN: root  # Nutzt das Root-Token für den dev-Modus
+            VAULT_TOKEN: root
         network_mode: "service:vault"
 
 networks:
